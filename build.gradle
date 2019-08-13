@@ -4,6 +4,7 @@ plugins {
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
 
 group = 'com.crud'
 version = '0.0.1-SNAPSHOT'
@@ -19,4 +20,8 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 	compile 'mysql:mysql-connector-java'
+	annotationProcessor('org.projectlombok:lombok')
+
+	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+
 }
