@@ -1,10 +1,10 @@
 plugins {
 	id 'org.springframework.boot' version '2.1.6.RELEASE'
-	//id 'java'
+	id 'java'
 }
 
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'war'
+//apply plugin: 'war'
 
 group = 'com.crud'
 version = '0.0.1-SNAPSHOT'
