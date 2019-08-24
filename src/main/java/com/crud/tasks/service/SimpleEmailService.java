@@ -17,7 +17,8 @@ public class SimpleEmailService {
     @Autowired
     JavaMailSender javaMailSender;
 
-    public void send(final Mail mail){
+    public void send(final Mail mail) {
+
         LOGGER.info("Starting email preparation...");
         try {
             javaMailSender.send(createMailMessage(mail));
@@ -28,13 +29,21 @@ public class SimpleEmailService {
         }
     }
 
+    static boolean isValid(String mail) {
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return mail.matches(regex);
+    }
+
     private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
 
-        mailMessage.setTo(mail.getMailTo());
+        if (isValid(mail.getMailTo())) {
+            mailMessage.setTo(mail.getMailTo());
+        }
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
         mailMessage.setCc(mail.getToCc());
         return mailMessage;
+
     }
 }
