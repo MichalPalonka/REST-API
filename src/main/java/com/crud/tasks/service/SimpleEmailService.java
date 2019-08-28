@@ -9,13 +9,15 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class SimpleEmailService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleEmailService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SimpleMailMessage.class);
 
     @Autowired
-    JavaMailSender javaMailSender;
+    private JavaMailSender javaMailSender;
 
     public void send(final Mail mail) {
 
@@ -29,20 +31,19 @@ public class SimpleEmailService {
         }
     }
 
-    static boolean isValid(String mail) {
+    /*static boolean isValid(String mail) {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
         return mail.matches(regex);
     }
+    */
 
     private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
 
-        if (isValid(mail.getMailTo())) {
-            mailMessage.setTo(mail.getMailTo());
-        }
+        mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
-        mailMessage.setCc(mail.getToCc());
+        Optional.ofNullable(mail.getToCc()).ifPresent(mailMessage::setCc);
         return mailMessage;
 
     }

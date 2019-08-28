@@ -25,7 +25,7 @@ public class SimpleEmailServiceTest {
     @Test
     public void shouldSendEmailWithoutCc() {
         // Given
-        Mail mail = new Mail("test@mail.com", "Test", "Test message");
+        Mail mail = new Mail("michalpalonka@gmail.com", "Test", "Test message");
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setText(mail.getMessage());
