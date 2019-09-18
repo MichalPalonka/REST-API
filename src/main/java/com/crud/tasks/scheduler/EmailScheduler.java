@@ -19,7 +19,7 @@ public class EmailScheduler {
     @Autowired
     private AdminConfig adminConfig;
 
-    private static final String SUBJECT = "Tasks: Once a day emial";
+    private static final String SUBJECT = "Tasks: Once a day email";
 
     @Scheduled(cron = "0 0 10 * * *")
     private void sendInformationEmail(){
