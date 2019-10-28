@@ -49,7 +49,7 @@ public class TrelloClientTest {
 
         //Given
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
-        trelloBoards[0] = new TrelloBoardDto("test_board", "test_id", new ArrayList<>());
+        trelloBoards[0] = new TrelloBoardDto("test_id", "test_board", new ArrayList<>());
 
         URI uri = new URI("http://test.com/members/MichaPalonka/boards?key=test&token=test&fields=name,id&lists=all");
 
@@ -80,8 +80,7 @@ public class TrelloClientTest {
                 "1",
                 "Test task",
                 "http://test.com",
-                trelloBadgesDto
-        );
+                trelloBadgesDto);
 
         when(restTemplate.postForObject(uri, null, CreatedTrelloCardDto.class)).thenReturn(createdTrelloCardDto);
 

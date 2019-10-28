@@ -40,6 +40,6 @@ public class SimpleEmailServiceTest {
 
         //Then
         verify(javaMailSender, times(1)).send(mailMessage);
-        Assert.assertEquals(null, mail.getToCc());
+        Assert.assertNull(mail.getToCc());
     }
 }
