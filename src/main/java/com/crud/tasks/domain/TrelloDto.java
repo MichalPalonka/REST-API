@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public
-class TrelloDto {
+public class TrelloDto {
     @JsonProperty("board")
     private int board;
 
