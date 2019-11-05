@@ -90,4 +90,36 @@ public class TrelloFacadeTest {
         assertNotNull(trelloBoardDtos);
         assertEquals(0, trelloBoardDtos.size());
     }
+
+    @Test
+    public void shouldCreateCreatedTrelloCardDto() {
+        //Given
+        TrelloBadgesDto trelloBadgesDto = new TrelloBadgesDto(1, new TrelloAttachmentsByTypeDto());
+        CreatedTrelloCardDto createdTrelloCardDto = new CreatedTrelloCardDto(
+                "1", "test","test.com", trelloBadgesDto);
+        TrelloCardDto trelloCardDto = new TrelloCardDto(
+                "test_name", "test","top", "1");
+        TrelloCard trelloCard = new TrelloCard(
+                "test_name", "test","top", "1");
+
+        when(trelloMapper.mapToCard(trelloCardDto)).thenReturn(trelloCard);
+        when(trelloMapper.mapToCardDto(trelloCard)).thenReturn(trelloCardDto);
+        when(trelloService.createdTrelloCard(trelloCardDto)).thenReturn(createdTrelloCardDto);
+
+        //When
+        CreatedTrelloCardDto createdTrelloCard = trelloFacade.createCard(trelloCardDto);
+
+        //Then
+        assertEquals("1",createdTrelloCard.getId());
+        assertEquals("test",createdTrelloCard.getName());
+        assertEquals("test.com",createdTrelloCard.getShortUrl());
+        assertEquals(1, createdTrelloCard.getBadges().getVotes());
+
+        assertEquals("test_name",trelloCard.getName());
+        assertEquals("test",trelloCard.getDescription());
+        assertEquals("top",trelloCard.getPos());
+        assertEquals("1",trelloCard.getListId());
+
+
+    }
 }

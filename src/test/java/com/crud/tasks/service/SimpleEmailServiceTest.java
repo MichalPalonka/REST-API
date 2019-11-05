@@ -42,4 +42,23 @@ public class SimpleEmailServiceTest {
         verify(javaMailSender, times(1)).send(mailMessage);
         Assert.assertNull(mail.getToCc());
     }
+
+    @Test
+    public void shouldSendEmailWithCc() {
+        // Given
+        Mail mail = new Mail("michalpalonka@gmail.com", "Test", "Test message", "ohyeag@gmail.com");
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setText(mail.getMessage());
+        mailMessage.setTo(mail.getMailTo());
+        mailMessage.setSubject(mail.getSubject());
+        Optional.ofNullable(mail.getToCc()).ifPresent(mailMessage::setCc);
+
+        // When
+        simpleEmailService.send(mail);
+
+        //Then
+        verify(javaMailSender, times(1)).send(mailMessage);
+        Assert.assertEquals("ohyeag@gmail.com", mail.getToCc());
+    }
 }
