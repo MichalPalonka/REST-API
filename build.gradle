@@ -30,6 +30,7 @@ dependencies {
 	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
 	compile group: 'commons-validator', name: 'commons-validator', version: '1.6'
 	compile 'com.google.code.gson:gson:2.8.2'
+	compile 'org.springframework.boot:spring-boot-starter-actuator'
 
 
 
